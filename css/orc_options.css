@@ -1,0 +1,19 @@
+.orc_options td {
+	padding:0 10px;
+}
+
+ul.orc_options_list {
+   list-style-type: square;
+   margin-top: -10px;
+}
+
+ul.orc_options_list li {
+   margin-left: 17px;
+   margin-bottom: 0;
+}
+
+.form-table.orc_options_table td {
+	padding: 0 10px;
+	margin: 0;
+	line-height: 1;
+}
