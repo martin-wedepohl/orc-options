@@ -3,7 +3,7 @@
   Plugin Name: Orchard Recovery Center Options
   Plugin URI:
   Description: Optional information used in Orchard Recovery Center website
-  Version: 1.3.1
+  Version: 1.4.0
   Author: Martin Wedepohl
   Author URI:
   License: GPLv2 or later
@@ -157,7 +157,7 @@ add_filter("plugin_action_links_$plugin", 'orc_options_add_settings_link');
  */
 function orc_options_admin_styles() {
     if (is_admin()) {
-        wp_enqueue_style('orc_options', plugins_url('css/orc_options.css', __FILE__));
+        wp_enqueue_style('orc_options', plugins_url('dist/css/orc_options.min.css', __FILE__));
     }
 }
 add_action('admin_enqueue_scripts', 'orc_options_admin_styles');
@@ -166,11 +166,11 @@ add_action('admin_enqueue_scripts', 'orc_options_admin_styles');
  * Add any scripts used by this plugin
  */
 function orc_options_add_scripts() {
-    wp_enqueue_script('orc-videos', plugins_url('js/orc.videos.js', __FILE__), array('jquery'), '1.0.0.0', true);
-    wp_enqueue_script('orc-contacthandler', plugins_url('js/orc.contacthandler.js', __FILE__), array('jquery'), '1.0.0.0', true);
+    wp_enqueue_script('orc-videos', plugins_url('dist/js/orc.videos.min.js', __FILE__), array('jquery'), '1.0.0.0', true);
+    wp_enqueue_script('orc-contacthandler', plugins_url('dist/js/orc.contacthandler.min.js', __FILE__), array('jquery'), '1.0.0.0', true);
     
     if ( is_page( 'staff' ) ) {
-        wp_enqueue_script('orc-staff', plugins_url('js/orc.staff.js', __FILE__), array('jquery'), '1.0.0.0', true);
+        wp_enqueue_script('orc-staff', plugins_url('dist/js/orc.staff.min.js', __FILE__), array('jquery'), '1.0.0.0', true);
         $excerpts = array(
             'administrative' => get_option('orc_options_staff_administrative_excerpt'),
             'clinical' => get_option('orc_options_staff_clinical_excerpt'),
@@ -196,10 +196,10 @@ add_action('wp_enqueue_scripts', 'orc_options_add_scripts');
  */
 function orc_custom_before_init_actions() {
     // Include new custom element and shortcodes
-    require_once plugin_dir_path(__FILE__) . 'shortcodes/orc-options-shortcodes.php';
-    require_once plugin_dir_path(__FILE__) . 'vc-elements/orc-carousel-elements.php';
-    require_once plugin_dir_path(__FILE__) . 'vc-elements/orc-contact-elements.php';
-    require_once plugin_dir_path(__FILE__) . 'vc-elements/orc-post-elements.php';
+    require_once plugin_dir_path(__FILE__) . 'includes/shortcodes/orc-options-shortcodes.php';
+    require_once plugin_dir_path(__FILE__) . 'includes/vc-elements/orc-carousel-elements.php';
+    require_once plugin_dir_path(__FILE__) . 'includes/vc-elements/orc-contact-elements.php';
+    require_once plugin_dir_path(__FILE__) . 'includes/vc-elements/orc-post-elements.php';
 }
 add_action('vc_before_init', 'orc_custom_before_init_actions');
 
@@ -853,4 +853,4 @@ add_action( 'init', function () {
 
 // Include all the custom post types
 
-require_once plugin_dir_path(__FILE__) . 'cpt/staff_member_cpt.php';
+require_once plugin_dir_path(__FILE__) . 'includes/cpt/staff_member_cpt.php';

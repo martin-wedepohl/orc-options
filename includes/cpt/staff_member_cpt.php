@@ -210,7 +210,7 @@ class orcStaffMember {
         if ('orc_staff_member' === $post->post_type) {
 
             // Plugin/Theme path
-            $plugin_path = plugin_dir_path(__FILE__) . '../templates/';
+            $plugin_path = plugin_dir_path(__FILE__) . '../../templates/';
             $theme_path = get_stylesheet_directory() . '/plugins/orc_options/templates/';
 
             // The name of custom post type single template.
@@ -246,7 +246,7 @@ class orcStaffMember {
         // Check if this is a staff member.
         if ('orc_staff_member' === $post->post_type) {
             // Plugin/Theme path
-            $plugin_path = plugin_dir_path(__FILE__) . '../templates/';
+            $plugin_path = plugin_dir_path(__FILE__) . '../../templates/';
             $theme_path = get_stylesheet_directory() . '/plugins/orc_options/templates/';
 
             // The name of custom post type single template.

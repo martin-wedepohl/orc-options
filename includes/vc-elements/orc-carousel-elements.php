@@ -12,7 +12,7 @@
  *       already registered.  
  */
 function orc_carousel_scripts() {
-    wp_enqueue_script('orc-carousel', plugin_dir_url(__FILE__) . '../js/orc.carousels.js', array('jquery', 'owl-carousel'), '1.0.0.1', true);
+    wp_enqueue_script('orc-carousel', plugin_dir_url(__FILE__) . '../../dist/js/orc.carousels.min.js', array('jquery', 'owl-carousel'), '1.0.0.1', true);
 }
 
 add_action('wp_enqueue_scripts', 'orc_carousel_scripts');
