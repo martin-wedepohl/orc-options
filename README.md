@@ -35,6 +35,9 @@ composer dump
 
 ### Changelog
 
+###### 1.4.1 2020-01-17
+* Enhancement: Start to use classes in files
+
 ###### 1.4.0 2020-01-14
 * Enhancement: Major change to the structure of the development side of the plugin
 * Enhancement: Use npm, composer, gulp to build the release version of the plugin
