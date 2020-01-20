@@ -1,5 +1,11 @@
 <?php
 
+namespace ORCOptions\Includes\CPT;
+
+defined('ABSPATH') or die;
+
+use ORCOptions\Includes\Config;
+
 class orcStaffMember {
 
     /**
@@ -56,7 +62,7 @@ class orcStaffMember {
             'public' => true,
             'publicly_queryable' => true,
             'show_ui' => true,
-            'show_in_menu' => true,
+            'show_in_menu' => Config::MENU_SLUG,
             'show_in_rest' => true,
             'query_var' => false,
             'rewrite' => array('slug' => 'staff_members', 'with_front' => true),

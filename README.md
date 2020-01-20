@@ -5,7 +5,7 @@
 * Tags: options, orchard recovery center, wedepohl engineering
 * Requires at least: 4.7 or higher
 * Tested up to: 5.3.2
-* Stable tag: 1.4.0
+* Stable tag: 1.4.2
 * License: [GPLv3 or later](https://www.gnu.org/licenses/gpl-3.0.html)
 
 ### Description
@@ -34,6 +34,12 @@ composer dump
 ### Screenshots
 
 ### Changelog
+
+###### 1.4.2 2020-01-17
+* Feature: Move Staff Members under main ORC OPtions menu
+* FIX: Correctly decode stored textareas
+* FIX: Correct call to close comments and pings
+* FIX: Correct call to disable Yoast SEO ld+json scripts since we are using our own
 
 ###### 1.4.1 2020-01-17
 * Enhancement: Start to use classes in files

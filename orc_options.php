@@ -3,7 +3,7 @@
   Plugin Name: Orchard Recovery Center Options
   Plugin URI:
   Description: Optional information used in Orchard Recovery Center website
-  Version: 1.4.1
+  Version: 1.4.2
   Author: Martin Wedepohl
   Author URI:
   License: GPLv2 or later
@@ -47,8 +47,8 @@
 
         add_action('init', [$this, 'orc_page_settings']);
         add_action('admin_init', [$this, 'orc_disable_comments_post_types_support']);
-        add_filter('comments_open', [$this, 'orc_disable_comments_status', 20, 2]);
-        add_filter('pings_open', [$this, 'orc_disable_comments_status', 20, 2]);
+        add_filter('comments_open', [$this, 'orc_disable_comments_status']);
+        add_filter('pings_open', [$this, 'orc_disable_comments_status']);
         add_filter('comments_array', [$this, 'orc_disable_comments_hide_existing_comments', 10, 2]);
         add_action('admin_menu', [$this, 'orc_disable_comments_admin_menu']);
         add_action('admin_init', [$this, 'orc_disable_comments_admin_menu_redirect']);
@@ -60,7 +60,7 @@
         add_action('wp_head', [$this, 'orc_add_bingtracking']);
         add_action('wp_footer', [$this, 'orc_add_linkedin']);
         add_action('wp_footer', [$this, 'orc_add_twitter']);
-        add_filter( 'wpseo_json_ld_output', [$this, '__return_false'] );
+        add_filter('wpseo_json_ld_output', '__return_false');
         remove_action('wp_head', [$this, 'rsd_link']);
         remove_action('wp_head', [$this, 'wlwmanifest_link']);
         remove_action('wp_head', [$this, 'wp_generator']);
@@ -68,7 +68,7 @@
         remove_action( 'wp_head', [$this, 'feed_links', 2] ); 
         remove_action('wp_head', [$this, 'feed_links_extra', 3] );
         add_filter('em_content', [$this, 'my_em_custom_content']);
-        add_action( 'init', [$this, 'delete_wpbakery_key']);
+        add_action('init', [$this, 'delete_wpbakery_key']);
 
         Options::initialize();
         
@@ -333,9 +333,11 @@
     //
     // Organizational Schema is only on the home page
     public function orc_add_schemas() {
-        $orc_options_org_schema = stripslashes(Options::getOption('orc_options_org_schema'));
+        $orc_options_org_schema = html_entity_decode(Options::getOption('orc_options_org_schema'));
+        $orc_options_org_schema = str_replace('\n', '', $orc_options_org_schema);
         $orc_options_org_schema = preg_replace( '/\R+|"[^"]*"(*SKIP)(*FAIL)|\s*/', '', $orc_options_org_schema );
-        $orc_options_local_schema = stripslashes(Options::getOption('orc_options_local_schema'));
+        $orc_options_local_schema = html_entity_decode(Options::getOption('orc_options_local_schema'));
+        $orc_options_local_schema = str_replace('\n', '', $orc_options_local_schema);
         $orc_options_local_schema = preg_replace( '/\R+|"[^"]*"(*SKIP)(*FAIL)|\s*/', '', $orc_options_local_schema );
 
         if (is_front_page() && strlen($orc_options_org_schema) > 0) {
