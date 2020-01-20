@@ -5,7 +5,7 @@ namespace ORCOptions\Includes;
 defined('ABSPATH') or die;
 
 class Config {
-    const PLUGIN_VERSION       = '1.4.3';
+    const PLUGIN_VERSION       = '1.4.4';
     const TEXT_DOMAIN          = 'orc-options';
     const CAPABILITY           = 'edit_posts';
     const MENU_SLUG            = 'orc-options';

@@ -5,7 +5,7 @@
 * Tags: options, orchard recovery center, wedepohl engineering
 * Requires at least: 4.7 or higher
 * Tested up to: 5.3.2
-* Stable tag: 1.4.3
+* Stable tag: 1.4.4
 * License: [GPLv3 or later](https://www.gnu.org/licenses/gpl-3.0.html)
 
 ### Description
@@ -35,7 +35,10 @@ composer dump
 
 ### Changelog
 
-###### 1.4.3 2020-01-17
+###### 1.4.4 2020-01-20
+* FIX: Build files are not copied to the plugin directory they need to be retrieved from GitHub
+
+###### 1.4.3 2020-01-20
 * FIX: Correct typos when visiting options page from plugin page
 * FIX: Correct typos when saving options
 
