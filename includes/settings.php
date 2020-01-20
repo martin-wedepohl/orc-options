@@ -51,13 +51,13 @@ class Settings {
     }
     
     /**
-     * Create the menu page that will show all the Options associated with the plugin.
+     * Create the menu page that will show all the options associated with the plugin.
      */
     public function createMenuPage() {
         if (!current_user_can(Config::CAPABILITY)) {
             wp_die(esc_html__('You do not have sufficient permissions to access this page', Config::TEXT_DOMAIN));
         }
-        printf('<div class="wrap"><h2>%s</h2><form action="Options.php" method="post">', esc_html__('BISK Plugin Options', Config::TEXT_DOMAIN));
+        printf('<div class="wrap"><h2>%s</h2><form action="options.php" method="post">', esc_html__('ORC Plugin Options', Config::TEXT_DOMAIN));
         
         settings_fields(Config::OPTION_GROUP);
         do_settings_sections(Config::MENU_SLUG);
@@ -306,8 +306,8 @@ class Settings {
      */
     public function registerSettingsPage() {
 //        register_setting(
-//                BISKConfig::ADMIN_OPTION_GROUP,
-//                BISKConfig::SETTINGS_KEY,
+//                Config::ADMIN_OPTION_GROUP,
+//                Config::SETTINGS_KEY,
 //                [$this, 'validateData']
 //        );
 
@@ -940,8 +940,8 @@ class Settings {
      */
     public function addSettingsLink($links) {
 
-        $settings_link = '<a href="admin.php?page=orc_Options_settings">' . __('Settings') . '</a>';
-        $info_link = '<a href="admin.php?page=orc_Options_info">' . __('Information') . '</a>';
+        $settings_link = '<a href="admin.php?page=' . CONFIG::MENU_SLUG . '">' . __('Settings') . '</a>';
+        $info_link = '<a href="admin.php?page=' . CONFIG::MENU_SLUG . '-info">' . __('Information') . '</a>';
         array_push($links, $settings_link);
         array_push($links, $info_link);
         return $links;
