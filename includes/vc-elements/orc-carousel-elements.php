@@ -22,8 +22,9 @@ class orcCarousel extends WPBakeryShortCode {
 
     // Element Initialization
     function __construct() {
+        $this->base = 'orc_carousel';
         add_action('init', array($this, 'orc_carousel_mapping'));
-        add_shortcode('orc_carousel', array($this, 'orc_carousel_render'));
+        add_shortcode($this->base, array($this, 'orc_carousel_render'));
     }
 
     // Element Mapping of parameters
@@ -277,7 +278,7 @@ class orcCarousel extends WPBakeryShortCode {
         $loopcarousel = ((0 === strcmp('true', $loopcarousel)) ? true : false);
         $roundimg = ((0 === strcmp('true', $roundimg)) ? true : false);
 
-        $css = apply_filters(VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, vc_shortcode_custom_css_class($css, ' '), $this->settings['base'], $atts);
+        $css = apply_filters(VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, vc_shortcode_custom_css_class($css, ' '), $this->base, $atts);
 
         wp_enqueue_script('owl-carousel', '', '', '', true);
         wp_enqueue_style('owl-carousel');

@@ -8,8 +8,9 @@ class orcPost extends WPBakeryShortCode {
 
     // Element Initialization
     function __construct() {
+        $this->base = 'orc_post';
         add_action('init', array($this, 'orc_post_mapping'));
-        add_shortcode('orc_post', array($this, 'orc_post_render'));
+        add_shortcode($this->base, array($this, 'orc_post_render'));
     }
 
     // Element Mapping of parameters
@@ -28,7 +29,7 @@ class orcPost extends WPBakeryShortCode {
         vc_map(
                 array(
                     'name' => __('ORC Post Type', 'text-domain'), // Human friendly name for the element
-                    'base' => 'orc_post', // MUST be shortcode from above
+                    'base' => $this->base, // MUST be shortcode from above
                     'description' => __('Orchard Recovery Center Custom Posts', 'text-domain'), // Human friendly description for the element
                     'category' => __('ORC Custom Elements', 'text-domain'), // Category for Visual Composer
 //				'icon' => get_template_directory_uri().'/assets/img/vc-icon.png',					// Icon to display  ***** TODO
@@ -185,7 +186,7 @@ class orcPost extends WPBakeryShortCode {
                 )
         );
 
-        $css = apply_filters(VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, vc_shortcode_custom_css_class($css, ' '), $this->settings['base'], $atts);
+        $css = apply_filters(VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, vc_shortcode_custom_css_class($css, ' '), $this->base, $atts);
 
         $html = '';
 

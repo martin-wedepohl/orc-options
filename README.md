@@ -4,8 +4,8 @@
 * Contributors: [martinwedepohl](https://en.gravatar.com/martinwedepohl) 
 * Tags: options, orchard recovery center, wedepohl engineering
 * Requires at least: 4.7 or higher
-* Tested up to: 5.3.2
-* Stable tag: 1.4.4
+* Tested up to: 5.6
+* Stable tag: 1.4.5
 * License: [GPLv3 or later](https://www.gnu.org/licenses/gpl-3.0.html)
 
 ### Description
@@ -34,6 +34,9 @@ composer dump
 ### Screenshots
 
 ### Changelog
+
+###### 1.4.5 2020-12-30
+* FIX: Avoid accessing null setting for base name
 
 ###### 1.4.4 2020-01-20
 * FIX: Build files are not copied to the plugin directory they need to be retrieved from GitHub
