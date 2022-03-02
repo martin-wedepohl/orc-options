@@ -5,7 +5,7 @@
 * Tags: options, orchard recovery center, wedepohl engineering
 * Requires at least: 4.7 or higher
 * Tested up to: 5.6
-* Stable tag: 1.4.5
+* Stable tag: 1.4.6
 * License: [GPLv3 or later](https://www.gnu.org/licenses/gpl-3.0.html)
 
 ### Description
@@ -34,6 +34,9 @@ composer dump
 ### Screenshots
 
 ### Changelog
+
+###### 1.4.6 2022-03-01
+* Enhancement: Use Google Analytics new tag method
 
 ###### 1.4.5 2020-12-30
 * FIX: Avoid accessing null setting for base name

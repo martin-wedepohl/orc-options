@@ -3,7 +3,7 @@
   Plugin Name: Orchard Recovery Center Options
   Plugin URI:
   Description: Optional information used in Orchard Recovery Center website
-  Version: 1.4.5
+  Version: 1.4.6
   Author: Martin Wedepohl
   Author URI:
   License: GPLv2 or later
@@ -291,39 +291,37 @@
 
         if (strlen($orc_options_google_analytics) > 0) {
             ?>
-            <!-- Google Analytics -->
+            <!-- Global site tag (gtag.js) - Google Analytics -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo $orc_options_google_analytics; ?>"></script>
             <script>
-                window.ga = window.ga || function () {
-                    (ga.q = ga.q || []).push(arguments);
-                };
-                ga.l = +new Date;
-                ga('create', '<?php echo $orc_options_google_analytics; ?>', 'auto');
-                ga('send', 'pageview');
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', '<?php echo $orc_options_google_analytics; ?>');
             </script>
-            <script async src='https://www.google-analytics.com/analytics.js'></script>
-            <!-- End Google Analytics -->
             <!-- Contact Form 7 hook into Google Analytics -->
             <script>
                 document.addEventListener('wpcf7mailsent', function (event) {
                     var analytics_event = 'Contact Form - Unknown';
                     
                     if(<?php echo $orc_options_wpcf7id; ?> == event.detail.contactFormId) {
-                        analytics_event = 'Contact Form - Intake';
+                        analytics_event = 'contact_intake';
                     } else if(<?php echo $orc_options_wpcf7id_comm; ?> == event.detail.contactFormId) {
-                        analytics_event = 'Contact Form - Communications';
+                        analytics_event = 'contact_communications';
                     } else if(<?php echo $orc_options_wpcf7id_hr; ?> == event.detail.contactFormId) {
-                        analytics_event = 'Contact Form - HR';
+                        analytics_event = 'contact_hr';
                     } else if(<?php echo $orc_options_wpcf7id_alumni; ?> == event.detail.contactFormId) {
-                        analytics_event = 'Contact Form - Alumni';
+                        analytics_event = 'contact_alumni';
                     } else if(<?php echo $orc_options_wpcf7id_website; ?> == event.detail.contactFormId) {
-                        analytics_event = 'Contact Form - Website';
+                        analytics_event = 'contact_website';
                     } else if(<?php echo $orc_options_wpcf7id_privacy; ?> == event.detail.contactFormId) {
-                        analytics_event = 'Contact Form - Privacy';
+                        analytics_event = 'contact_privacy';
                     }
                     
-                    ga('send', 'event', analytics_event, 'submit');
+                    gtag('event', analytics_event, { 'method': 'email' });
                 }, false);
-            </script>		
+            </script>
             <!-- End Contact Form 7 hook -->
             <?php
         }
