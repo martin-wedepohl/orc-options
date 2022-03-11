@@ -1,28 +1,26 @@
-( function ( $ ) {
-	'use strict';
-	
-	jQuery(document).ready(function() {
-		
-		var mainvideo = videourls.mainVideo;
-		var xmasvideo = videourls.xmasVideo;
-	
-		$('.mainVideo').on('click', function() {
-			$('#video, #overlay').fadeIn('slow');
-			$('#video-container').html('<iframe width=560 height=315 src=https://www.youtube.com/embed/' + mainvideo + '?rel=0 frameborder=0 allowfullscreen></iframe>');
-		});
-		
-		$('.xmasVideo').on('click', function() {
-			$('#video, #overlay').fadeIn('slow');
-			$('#video-container').html('<iframe width=560 height=315 src=https://www.youtube.com/embed/' + xmasvideo + '?rel=0 frameborder=0 allowfullscreen></iframe>');
-		});
-		
-		$(document).on('touchend, mouseup', function(e) {
-			if (!$('#video').is(e.target)) {
-				$('#video, #overlay').fadeOut('slow');
-				$('#video-container').html('');
-			}
-		});
+const showVideo = ((video) => {
+	document.querySelector('#video').classList.add('show');
+	document.querySelector('#overlay').classList.add('show');
+	document.querySelector('#video-container').innerHTML = `<iframe width=560 height=315 src=https://www.youtube.com/embed/${video}?rel=0 frameborder=0 allowfullscreen></iframe>`;
+});
 
-   }); // End (document).ready
-	
-}( jQuery ));
+const stopVideo = ((e) => {
+	if ('video' !== e.target.id) {
+		document.querySelector('#video').classList.remove('show');
+		document.querySelector('#overlay').classList.remove('show');
+		document.querySelector('#video-container').innerHTML = '';
+	}
+});
+
+const mainVideo = document.querySelector('.mainVideo');
+if (mainVideo) {
+	mainVideo.addEventListener('click', showVideo.bind(null, videourls.mainVideo), false)
+}
+
+const xmasVideo = document.querySelector('.xmasVideo');
+if (xmasVideo) {
+	xmasVideo.addEventListener('click', showVideo.bind(null, videourls.xmasVideo), false)
+}
+
+document.addEventListener('touchend', stopVideo, false);
+document.addEventListener('mouseup', stopVideo, false);

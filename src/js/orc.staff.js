@@ -1,31 +1,31 @@
-( function ( $ ) {
-	'use strict';
-	
-	jQuery(document).ready(function() {
+const showExcerpt = (e) => {
+	const staffExcerpt = document.querySelector('#staff-excerpt');
+	switch (e.target.textContent) {
+		case 'Administrative Staff':
+			staffExcerpt.innerHTML = staffexcerpt.administrative;
+			break;
+		case 'Clinical Team':
+			staffExcerpt.innerHTML = staffexcerpt.clinical;
+			break;
+		case 'Medical Team':
+			staffExcerpt.innerHTML = staffexcerpt.medical;
+			break;
+		case 'Recovery Coach':
+			staffExcerpt.innerHTML = staffexcerpt.recovery;
+			break;
+		case 'Support Staff':
+			staffExcerpt.innerHTML = staffexcerpt.support;
+			break;
+		case 'Wellness':
+			staffExcerpt.innerHTML = staffexcerpt.wellness;
+			break;
+		default:
+			staffExcerpt.innerHTML = '';
+	}
+}
 
-        var excerpt;
-        $(document).on('click', 'span', function() {
-            if('Administrative Staff' === $(this).text()) {
-        		excerpt = staffexcerpt.administrative;
-                $('#staff-excerpt').html(excerpt);
-            } else if('Clinical Team' === $(this).text()) {
-        		excerpt = staffexcerpt.clinical;
-                $('#staff-excerpt').html(excerpt);
-            } else if('Medical Team' === $(this).text()) {
-        		excerpt = staffexcerpt.medical;
-                $('#staff-excerpt').html(excerpt);
-            } else if('Recovery Coach' === $(this).text()) {
-        		excerpt = staffexcerpt.recovery;
-                $('#staff-excerpt').html(excerpt);
-            } else if('Support Staff' === $(this).text()) {
-        		excerpt = staffexcerpt.support;
-                $('#staff-excerpt').html(excerpt);
-            } else if('Wellness' === $(this).text()) {
-        		excerpt = staffexcerpt.wellness;
-                $('#staff-excerpt').html(excerpt);
-            }
-        });
+const orcStaffMemberDepartments = document.querySelectorAll('[data-vc-grid-filter] li span');
 
-   }); // End (document).ready
-	
-}( jQuery ));
+[...orcStaffMemberDepartments].forEach((department) => {
+	department.addEventListener('click', showExcerpt, false);
+});
