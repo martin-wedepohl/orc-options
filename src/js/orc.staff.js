@@ -1,31 +1,49 @@
+const staffExcerpt = document.querySelector('#staff-excerpt');
+
 const showExcerpt = (e) => {
-	const staffExcerpt = document.querySelector('#staff-excerpt');
+	e.preventDefault();
+	staffExcerpt.innerHTML = '';
+	staffExcerpt.classList.remove('show');
+	let excerpt = '';
 	switch (e.target.textContent) {
 		case 'Administrative Staff':
-			staffExcerpt.innerHTML = staffexcerpt.administrative;
+			excerpt = staffexcerpt.administrative;
 			break;
 		case 'Clinical Team':
-			staffExcerpt.innerHTML = staffexcerpt.clinical;
+			excerpt = staffexcerpt.clinical;
 			break;
 		case 'Medical Team':
-			staffExcerpt.innerHTML = staffexcerpt.medical;
+			excerpt = staffexcerpt.medical;
 			break;
 		case 'Recovery Coach':
-			staffExcerpt.innerHTML = staffexcerpt.recovery;
+			excerpt = staffexcerpt.recovery;
 			break;
 		case 'Support Staff':
-			staffExcerpt.innerHTML = staffexcerpt.support;
+			excerpt = staffexcerpt.support;
 			break;
 		case 'Wellness':
-			staffExcerpt.innerHTML = staffexcerpt.wellness;
+			excerpt = staffexcerpt.wellness;
 			break;
 		default:
-			staffExcerpt.innerHTML = '';
+			excerpt = '';
+	}
+
+	if (excerpt.length > 0) {
+		staffExcerpt.innerHTML = excerpt;
+		staffExcerpt.classList.add('show');
+		const closeButton = document.createElement('button');
+		closeButton.classList.add('close-staff-excerpt');
+		closeButton.textContent = 'X';
+		closeButton.addEventListener('click', closeExcerpt, { once: true });
+		staffExcerpt.append(closeButton);
 	}
 }
 
-const orcStaffMemberDepartments = document.querySelectorAll('[data-vc-grid-filter] li span');
+const closeExcerpt = () => {
+	staffExcerpt.classList.remove('show');
+}
 
+const orcStaffMemberDepartments = document.querySelectorAll('[data-vc-grid-filter] li span');
 [...orcStaffMemberDepartments].forEach((department) => {
 	department.addEventListener('click', showExcerpt, false);
 });

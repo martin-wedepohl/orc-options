@@ -1,0 +1,43 @@
+#staff-excerpt {
+	text-align: center;
+	position: fixed;
+	padding: 1vw;
+	top: 30vh;
+	left: 5vw;
+	right: 5vw;
+	background: white;
+	opacity: 0;
+	visibility: hidden;
+	z-index: -1;
+	box-shadow:
+		1px 1px 2px 2px rgb(158, 161, 116),
+		2px 2px 4px 4px rgb(255, 255, 255),
+		4px 4px 8px 8px rgb(158, 161, 116);
+	transition:
+		opacity .5s ease-in-out,
+		visibility .5s ease-in-out,
+		z-index .5s ease-in-out;
+}
+
+#staff-excerpt.show {
+	opacity: 1;
+	visibility: visible;
+	z-index: 100;
+}
+
+.close-staff-excerpt {
+	position: absolute;
+	padding-top: .1em;
+	right: .5em;
+	top: .5em;
+	font-size: 2rem;
+	z-index: 101;
+	box-shadow: 
+		0 0 0 1px lightgray,
+		0 0 0 2px gray;
+	transition: box-shadow .5s ease-in-out;
+}
+
+.close-staff-excerpt:hover {
+	box-shadow: inset 0 0 6px 1px gray;
+}

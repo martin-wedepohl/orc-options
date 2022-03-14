@@ -3,7 +3,7 @@
 Plugin Name: Orchard Recovery Center Options
 Plugin URI:
 Description: Optional information used in Orchard Recovery Center website
-Version: 2.0.0
+Version: 2.0.1
 Author: Martin Wedepohl
 Author URI:
 License: GPLv2 or later
@@ -194,6 +194,7 @@ class ORCOptions {
 		}
 
 		if ( is_page( 'staff' ) ) {
+			wp_enqueue_style( 'orc-staff', plugins_url( 'dist/css/orc_staff.min.css', __FILE__ ), array(), \filemtime( plugin_dir_path( __FILE__ ) . '/dist/css/orc_staff.min.css' ) );
 			wp_enqueue_script( 'orc-staff', plugins_url( 'dist/js/orc.staff.min.js', __FILE__ ), array(), \filemtime( plugin_dir_path( __FILE__ ) . '/dist/js/orc.staff.min.js' ), true );
 			// Pass the excepts to the staff script.
 			$excerpts = array(

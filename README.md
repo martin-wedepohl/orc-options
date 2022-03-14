@@ -5,7 +5,7 @@
 * Tags: options, orchard recovery center, wedepohl engineering
 * Requires at least: 4.7 or higher
 * Tested up to: 5.6
-* Stable tag: 1.4.6
+* Stable tag: 2.0.1
 * License: [GPLv3 or later](https://www.gnu.org/licenses/gpl-3.0.html)
 
 ### Description
@@ -34,6 +34,15 @@ composer dump
 ### Screenshots
 
 ### Changelog
+
+###### 2.0.1 2022-03-14
+* Use pop-up for the staff excerpt rather than pushing images down and causing a layout shift
+
+###### 2.0.0 2022-03-11
+* Use webpack rather than gulp to build plugin
+* Fixed WordPress warning in php code
+* Changed contact handler, staff and videos to vanilla javascript instead of jquery
+* Video CSS moved from page to external file
 
 ###### 1.4.6 2022-03-01
 * Enhancement: Use Google Analytics new tag method
