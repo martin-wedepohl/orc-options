@@ -1,60 +1,49 @@
 {
-    "name": "orc-options",
-    "version": "1.4.5",
-    "description": "Orchard Recovery Center Options Pugin",
-    "author": "Martin Wedepohl <martin.wedepohl@shaw.ca> (http://wedepohlengineering.com)",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/martin-wedepohl/orc-options"
-    },
-    "keywords": [
-        "PHP",
-        "gulp",
-        "es6",
-        "scss"
-    ],
-    "devDependencies": {
-        "@babel/core": "^7.2.2",
-        "@babel/preset-env": "^7.2.3",
-        "acorn": "^6.0.0",
-        "babelify": "^10.0.0",
-        "browser-sync": "^2.24.4",
-        "browserify": "^16.2.3",
-        "browserify-shim": "^3.8.14",
-        "gulp": "^4.0.0",
-        "gulp-autoprefixer": "^6.0.0",
-        "gulp-concat": "^2.5.2",
-        "gulp-if": "^2.0.2",
-        "gulp-notify": "^3.2.0",
-        "gulp-options": "^1.1.1",
-        "gulp-plumber": "^1.2.0",
-        "gulp-rename": "^1.2.3",
-        "gulp-sass": "^4.0.2",
-        "gulp-sourcemaps": "^2.6.4",
-        "gulp-strip-debug": "^3.0.0",
-        "gulp-uglify": "^3.0.0",
-        "gulp-uglifycss": "^1.0.9",
-        "vinyl-buffer": "^1.0.0",
-        "vinyl-source-stream": "^2.0.0"
-    },
-    "babel": {
-        "presets": [
-            "@babel/preset-env"
-        ]
-    },
-    "browserify": {
-        "transform": [
-            "browserify-shim"
-        ]
-    },
-    "browser": {
-        "jquery": "./node_modules/jquery/dist/jquery.js"
-    },
-    "browserify-shim": {
-        "jquery": "$"
-    },
-    "license": "GPL-3.0",
-    "dependencies": {
-        "code-prettify": "^0.1.0"
-    }
+	"name": "orc-options",
+	"version": "2.0.0",
+	"description": "Orchard Recovery Center Options Pugin",
+	"author": "Martin Wedepohl <martin.wedepohl@shaw.ca> (http://wedepohlengineering.com)",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/martin-wedepohl/orc-options"
+	},
+	"keywords": [
+		"PHP",
+		"gulp",
+		"es6",
+		"scss"
+	],
+	"scripts": {
+		"build": "webpack --mode production",
+		"dev": "webpack --mode development --watch"
+	},
+	"browserslist": [
+		"defaults"
+	],
+	"dependencies": {
+		"@babel/polyfill": "^7.12.1"
+	},
+	"devDependencies": {
+		"@babel/cli": "^7.17.6",
+		"@babel/core": "^7.17.5",
+		"@babel/preset-env": "^7.16.11",
+		"autoprefixer": "^10.4.2",
+		"babel-core": "^6.26.3",
+		"browser-sync": "^2.27.7",
+		"browser-sync-webpack-plugin": "^2.3.0",
+		"copy-webpack-plugin": "^10.2.4",
+		"css-loader": "^6.6.0",
+		"file-loader": "^6.2.0",
+		"mini-css-extract-plugin": "^2.5.3",
+		"node-sass": "^7.0.1",
+		"sass-loader": "^12.6.0",
+		"url-loader": "^4.1.1",
+		"webpack": "^5.69.1",
+		"webpack-cli": "^4.9.2"
+	},
+	"babel": {
+		"presets": [
+			"@babel/preset-env"
+		]
+	}
 }

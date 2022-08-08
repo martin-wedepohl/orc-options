@@ -1,17 +1,36 @@
-( function ( $ ) {
-	'use strict';
-	
-   $(document).ready(function($) {
-		$('.doemail').click(function() {
-			var whotocontact = $(this).data( 'whotocontact' );
-			var contactus = contactdata.contactuspage;
-			var caller = location.href;
-			$('#main-content').append('<form style="display:none;" id="gotocontactus" method="post" action="' + contactus + '">');
-			$('#gotocontactus').append('<input type="hidden" name="whotocontact" value="' + whotocontact + '"><br/>');
-			$('#gotocontactus').append('<input type="hidden" name="caller" value="' + caller + '"><br/>');
-			$('#gotocontactus').append('<input type="hidden" name="contactus" value="' + contactus + '"><br/>');
-			$('#gotocontactus').submit();
-		});
-   });
+const doEmail = document.querySelectorAll('.doemail');
+[...doEmail].forEach((email) => {
+	email.addEventListener('click', (e) => {
+		const whoToContact = e.target.dataset.whotocontact;
+		const contactUs = contactdata.contactuspage;
+		const caller = location.href;
+		const mainContent = document.querySelector('#main-content');
 
-}( jQuery ));
+		const form = document.createElement('form');
+		form.style.display = 'none';
+		form.id = 'gotocontacdtus';
+		form.method = 'post';
+		form.action = contactUs;
+
+		let input = document.createElement('input');
+		input.type = 'hidden';
+		input.name = 'whotocontact';
+		input.value = whoToContact;
+		form.append(input);
+
+		input = document.createElement('input');
+		input.type = 'hidden';
+		input.name = 'caller';
+		input.value = caller;
+		form.append(input);
+
+		input = document.createElement('input');
+		input.type = 'hidden';
+		input.name = 'contactus';
+		input.value = contactUs;
+		form.append(input);
+
+		mainContent.append(form);
+		form.submit();
+	});
+});

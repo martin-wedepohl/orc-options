@@ -3,9 +3,9 @@
 Plugin Name: Orchard Recovery Center Options
 Plugin URI:
 Description: Optional information used in Orchard Recovery Center website
-Version: 2.0.3
+Version: 2.0.4
 Author: Martin Wedepohl
-Author URI:
+Author URI: https://wedepohlengineering.com
 License: GPLv2 or later
 */
 

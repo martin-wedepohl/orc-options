@@ -1,0 +1,45 @@
+#overlay {
+	position: fixed;
+	inset: 0;
+	z-index: -100;
+	height: 100%;
+	width: 100%;
+	background: #ffffff;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity .5s ease-in-out, visibility .5s ease-in-out, z-index .5s ease-in-out;
+}
+#overlay.show {
+	opacity: 0.6;
+	visibility: visible;
+	z-index: 1;
+}
+#video {
+	visibility: hidden;
+	position: absolute;
+	top: 5%;
+	left: 10%;
+	width: 80%;
+	z-index: -100;
+	opacity: 0;
+	transition: opacity .5s ease-in-out, visibility .5s ease-in-out, z-index .5s ease-in-out;
+}
+#video.show {
+	opacity: 1;
+	visibility: visible;
+	z-index: 20;
+}
+#video-container {
+	position: relative;
+	padding-bottom: 45%;
+	padding-top: 30px;
+	height: 0;
+	overflow: hidden;
+}
+#video-container iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}

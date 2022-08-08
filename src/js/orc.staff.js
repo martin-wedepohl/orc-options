@@ -1,31 +1,49 @@
-( function ( $ ) {
-	'use strict';
-	
-	jQuery(document).ready(function() {
+const staffExcerpt = document.querySelector('#staff-excerpt');
 
-        var excerpt;
-        $(document).on('click', 'span', function() {
-            if('Administrative Staff' === $(this).text()) {
-        		excerpt = staffexcerpt.administrative;
-                $('#staff-excerpt').html(excerpt);
-            } else if('Clinical Team' === $(this).text()) {
-        		excerpt = staffexcerpt.clinical;
-                $('#staff-excerpt').html(excerpt);
-            } else if('Medical Team' === $(this).text()) {
-        		excerpt = staffexcerpt.medical;
-                $('#staff-excerpt').html(excerpt);
-            } else if('Recovery Coach' === $(this).text()) {
-        		excerpt = staffexcerpt.recovery;
-                $('#staff-excerpt').html(excerpt);
-            } else if('Support Staff' === $(this).text()) {
-        		excerpt = staffexcerpt.support;
-                $('#staff-excerpt').html(excerpt);
-            } else if('Wellness' === $(this).text()) {
-        		excerpt = staffexcerpt.wellness;
-                $('#staff-excerpt').html(excerpt);
-            }
-        });
+const showExcerpt = (e) => {
+	e.preventDefault();
+	staffExcerpt.innerHTML = '';
+	staffExcerpt.classList.remove('show');
+	let excerpt = '';
+	switch (e.target.textContent) {
+		case 'Administrative Staff':
+			excerpt = staffexcerpt.administrative;
+			break;
+		case 'Clinical Team':
+			excerpt = staffexcerpt.clinical;
+			break;
+		case 'Medical Team':
+			excerpt = staffexcerpt.medical;
+			break;
+		case 'Recovery Coach':
+			excerpt = staffexcerpt.recovery;
+			break;
+		case 'Support Staff':
+			excerpt = staffexcerpt.support;
+			break;
+		case 'Wellness':
+			excerpt = staffexcerpt.wellness;
+			break;
+		default:
+			excerpt = '';
+	}
 
-   }); // End (document).ready
-	
-}( jQuery ));
+	if (excerpt.length > 0) {
+		staffExcerpt.innerHTML = excerpt;
+		staffExcerpt.classList.add('show');
+		const closeButton = document.createElement('button');
+		closeButton.classList.add('close-staff-excerpt');
+		closeButton.textContent = 'X';
+		closeButton.addEventListener('click', closeExcerpt, { once: true });
+		staffExcerpt.append(closeButton);
+	}
+}
+
+const closeExcerpt = () => {
+	staffExcerpt.classList.remove('show');
+}
+
+const orcStaffMemberDepartments = document.querySelectorAll('[data-vc-grid-filter] li span');
+[...orcStaffMemberDepartments].forEach((department) => {
+	department.addEventListener('click', showExcerpt, false);
+});
