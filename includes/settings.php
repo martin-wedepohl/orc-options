@@ -324,6 +324,7 @@ class Settings {
         register_setting(Config::OPTION_GROUP, Config::MAIN, 'sanitize_text_field');
         register_setting(Config::OPTION_GROUP, Config::XMAS, 'sanitize_text_field');
         register_setting(Config::OPTION_GROUP, Config::GOOGLE, 'sanitize_text_field');
+        register_setting(Config::OPTION_GROUP, Config::GOOGLE_TAG, 'sanitize_text_field');
         register_setting(Config::OPTION_GROUP, Config::FACEBOOK, 'sanitize_text_field');
         register_setting(Config::OPTION_GROUP, Config::PIXEL, 'sanitize_text_field');
         register_setting(Config::OPTION_GROUP, Config::BING, 'sanitize_text_field');
@@ -556,6 +557,20 @@ class Settings {
                     'value' => Options::getOption(Config::GOOGLE),
                     'name' => Config::GOOGLE,
                     'id' => Config::GOOGLE
+                )
+        );
+
+        add_settings_field(
+                Config::GOOGLE_TAG,
+                esc_html__('Google Tag Manager Code:', Config::TEXT_DOMAIN),
+                [$this, 'textField'],
+                Config::MENU_SLUG,
+                Config::ANALYTICS_SECTION,
+                array(
+                    'classes' => 'widefat',
+                    'value' => Options::getOption(Config::GOOGLE_TAG),
+                    'name' => Config::GOOGLE_TAG,
+                    'id' => Config::GOOGLE_TAG
                 )
         );
 

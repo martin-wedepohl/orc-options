@@ -19,7 +19,6 @@ var sourcemaps = require('gulp-sourcemaps');
 var notify = require('gulp-notify');
 var options = require('gulp-options');
 var gulpif = require('gulp-if');
-var image = require('gulp-image');
 
 var devDir = './';
 var baseDir = '../../wp-content/plugins/orc-options/';
@@ -37,10 +36,6 @@ var jsVideos = 'orc.videos.js';
 var jsContact = 'orc.contacthandler.js';
 var jsFiles = [jsCarousel, jsStaff, jsVideos, jsContact];
 var jsDEST = baseDir + 'dist/js/';
-
-// Images
-//var imageSRC     = devDir + '/src/images/*';
-//var imageURL     = baseDir + 'dist/images/';
 
 // Index files watch
 var srcIndexWatch = devDir + 'src/index.php';
@@ -62,7 +57,6 @@ var vendorWatch = devDir + 'vendor/**/*.*';
 var assetsWatch = devDir + 'assets/**/*.*';
 var rootFiles = ['./LICENSE', './README.md'];
 var rootPhp = './*.php';
-//var imageWatch   = devDir + 'src/images/**/*';
 
 function style(done) {
     gulp
@@ -98,13 +92,6 @@ function script(done) {
     });
     done();
 }
-
-//function compress_images( done ) {
-//    src( imageSRC )
-//        .pipe(image())
-//        .pipe( dest( imageURL ) );
-//    done();
-//}
 
 function copyIndex(done) {
     gulp.src(srcIndexWatch, { allowEmpty: true })

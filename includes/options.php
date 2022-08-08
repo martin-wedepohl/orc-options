@@ -39,6 +39,7 @@ class Options {
         self::$options[Config::XMAS] = esc_js(get_option(Config::XMAS));
 
         self::$options[Config::GOOGLE] = esc_js(get_option(Config::GOOGLE));
+        self::$options[Config::GOOGLE_TAG] = esc_js(get_option(Config::GOOGLE_TAG));
         self::$options[Config::FACEBOOK] = esc_js(get_option(Config::FACEBOOK));
         self::$options[Config::PIXEL] = esc_js(get_option(Config::PIXEL));
         self::$options[Config::BING] = esc_js(get_option(Config::BING));

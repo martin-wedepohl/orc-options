@@ -5,7 +5,7 @@ namespace ORCOptions\Includes;
 defined('ABSPATH') or die;
 
 class Config {
-    const PLUGIN_VERSION       = '1.4.5';
+    const PLUGIN_VERSION       = '2.0.3';
     const TEXT_DOMAIN          = 'orc-options';
     const CAPABILITY           = 'edit_posts';
     const MENU_SLUG            = 'orc-options';
@@ -44,6 +44,7 @@ class Config {
 
     // Analytics
     const GOOGLE               = 'orc_options_google_analytics';
+    const GOOGLE_TAG           = 'orc_options_google_tag';
     const FACEBOOK             = 'orc_options_facebookappid';
     const PIXEL                = 'orc_options_facebookpixel';
     const BING                 = 'orc_options_bing';

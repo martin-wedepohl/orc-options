@@ -4,8 +4,8 @@
 * Contributors: [martinwedepohl](https://en.gravatar.com/martinwedepohl) 
 * Tags: options, orchard recovery center, wedepohl engineering
 * Requires at least: 4.7 or higher
-* Tested up to: 5.6
-* Stable tag: 1.4.5
+* Tested up to: 5.9.3
+* Stable tag: 2.0.3
 * License: [GPLv3 or later](https://www.gnu.org/licenses/gpl-3.0.html)
 
 ### Description
@@ -34,6 +34,12 @@ composer dump
 ### Screenshots
 
 ### Changelog
+
+###### 2.0.3 2022-0808
+* FIX: Formatting per WordPress phpcs coding standards
+* Feature: Add Google Tag manager
+* Feature: Add Facebook Domain Verification
+* FIX: Removed unused gulp functions
 
 ###### 1.4.5 2020-12-30
 * FIX: Avoid accessing null setting for base name
