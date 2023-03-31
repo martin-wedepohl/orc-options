@@ -3,9 +3,9 @@
 
 * Contributors: [martinwedepohl](https://en.gravatar.com/martinwedepohl) 
 * Tags: options, orchard recovery center, wedepohl engineering
-* Requires at least: 4.7 or higher
-* Tested up to: 5.9.3
-* Stable tag: 2.0.4
+* Requires at least: 5.7 or higher
+* Tested up to: 6.2
+* Stable tag: 2.1.0
 * License: [GPLv3 or later](https://www.gnu.org/licenses/gpl-3.0.html)
 
 ### Description
@@ -34,6 +34,11 @@ composer dump
 ### Screenshots
 
 ### Changelog
+
+###### 2.1.0 2023-03-31
+* FIX: Use function get_page_by_title_search to replace deprecated get_page_by_title WordPress function.
+* Removed delete emails since Flamingo is no longer being used for email storage.
+* Cleaned up WordPress formatting errors.
 
 ###### 2.0.4 2022-08-08
 * Merge changes from github
