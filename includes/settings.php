@@ -330,6 +330,7 @@ class Settings {
         register_setting(Config::OPTION_GROUP, Config::BING, 'sanitize_text_field');
         register_setting(Config::OPTION_GROUP, Config::LINKEDIN, 'sanitize_text_field');
         register_setting(Config::OPTION_GROUP, Config::TWITTER, 'sanitize_text_field');
+        register_setting(Config::OPTION_GROUP, Config::REHAB_PATH_SCRIPT, 'sanitize_text_field');
         register_setting(Config::OPTION_GROUP, Config::ORG, [$this, 'validateData']);
         register_setting(Config::OPTION_GROUP, Config::LOCAL, [$this, 'validateData']);
         register_setting(Config::OPTION_GROUP, Config::ADMINISTRATIVE, [$this, 'validateData']);
@@ -641,6 +642,20 @@ class Settings {
                     'value' => Options::getOption(Config::TWITTER),
                     'name' => Config::TWITTER,
                     'id' => Config::TWITTER
+                )
+        );
+
+        add_settings_field(
+                Config::REHAB_PATH_SCRIPT,
+                esc_html__('Rehab Path Script Link:', Config::TEXT_DOMAIN),
+                [$this, 'textField'],
+                Config::MENU_SLUG,
+                Config::ANALYTICS_SECTION,
+                array(
+                    'classes' => 'widefat',
+                    'value' => Options::getOption(Config::REHAB_PATH_SCRIPT),
+                    'name' => Config::REHAB_PATH_SCRIPT,
+                    'id' => Config::REHAB_PATH_SCRIPT
                 )
         );
 

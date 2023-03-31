@@ -5,7 +5,7 @@
 * Tags: options, orchard recovery center, wedepohl engineering
 * Requires at least: 4.7 or higher
 * Tested up to: 5.9.3
-* Stable tag: 2.0.4
+* Stable tag: 2.0.5
 * License: [GPLv3 or later](https://www.gnu.org/licenses/gpl-3.0.html)
 
 ### Description
@@ -34,6 +34,9 @@ composer dump
 ### Screenshots
 
 ### Changelog
+
+###### 2.0.5 2023-03-31
+* Added Rehab Path script
 
 ###### 2.0.4 2022-08-08
 * Merge changes from github

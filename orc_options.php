@@ -3,7 +3,7 @@
 Plugin Name: Orchard Recovery Center Options
 Plugin URI:
 Description: Optional information used in Orchard Recovery Center website
-Version: 2.0.4
+Version: 2.0.5
 Author: Martin Wedepohl
 Author URI: https://wedepohlengineering.com
 License: GPLv2 or later
@@ -61,6 +61,7 @@ class ORCOptions {
 		add_action( 'wp_head', array( $this, 'orc_add_schemas' ) );
 		add_action( 'wp_head', array( $this, 'orc_add_facebookpixel' ) );
 		add_action( 'wp_head', array( $this, 'orc_add_bingtracking' ) );
+		add_action( 'wp_head', array( $this, 'orc_add_rehabpathscript' ) );
 		add_action( 'wp_footer', array( $this, 'orc_add_linkedin' ) );
 		add_action( 'wp_footer', array( $this, 'orc_add_twitter' ) );
 		add_filter( 'wpseo_json_ld_output', '__return_false' );
@@ -485,6 +486,17 @@ class ORCOptions {
 			</script>
 			<!-- End Twitter universal website tag code -->
 			<?php
+		}
+	}
+
+	/**
+	 * Add Rehab Path Script
+	 */
+	public function orc_add_rehabpathscript() {
+		$orc_rehab_path_script = Options::getOption( Config::REHAB_PATH_SCRIPT );
+
+		if ( strlen( $orc_rehab_path_script ) > 0 ) {
+			echo '<!-- Rehab Path --><script async src="' . esc_attr( $orc_rehab_path_script ) . '"</script><!-- End Rehab Path -->';
 		}
 	}
 

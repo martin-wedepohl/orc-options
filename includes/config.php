@@ -5,7 +5,7 @@ namespace ORCOptions\Includes;
 defined( 'ABSPATH' ) or die;
 
 class Config {
-	const PLUGIN_VERSION       = '2.0.4';
+	const PLUGIN_VERSION       = '2.0.5';
 	const TEXT_DOMAIN          = 'orc-options';
 	const CAPABILITY           = 'edit_posts';
 	const MENU_SLUG            = 'orc-options';
@@ -50,6 +50,7 @@ class Config {
 	const BING                 = 'orc_options_bing';
 	const LINKEDIN             = 'orc_options_linkedin';
 	const TWITTER              = 'orc_options_twitter';
+	const REHAB_PATH_SCRIPT    = 'orc_rehab_path_script';
 
 	// Schema's.
 	const ORG                  = 'orc_options_org_schema';
