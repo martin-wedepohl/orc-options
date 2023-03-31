@@ -35,6 +35,9 @@ composer dump
 
 ### Changelog
 
+###### 2.0.6 2023-03-31
+* Fixed typo in Rehab Path script
+
 ###### 2.0.5 2023-03-31
 * Added Rehab Path script
 
