@@ -1,13 +1,15 @@
 <?php
-/*
-Plugin Name: Orchard Recovery Center Options
-Plugin URI:
-Description: Optional information used in Orchard Recovery Center website
-Version: 2.0.6
-Author: Martin Wedepohl
-Author URI: https://wedepohlengineering.com
-License: GPLv2 or later
-*/
+/**
+ * Plugin Name: Orchard Recovery Center Options
+ * Plugin URI:
+ * Description: Optional information used in Orchard Recovery Center website
+ * Version: 2.1.0
+ * Author: Martin Wedepohl
+ * Author URI: https://wedepohlengineering.com
+ * License: GPLv2 or later
+ *
+ * @package ORC_OPTIONS
+ */
 
 namespace ORCOptions;
 
@@ -25,6 +27,24 @@ use ORCOptions\Includes\Options;
 class ORCOptions {
 
 	/**
+	 * Get the page by searching for the title string.
+	 * Replaces the WP 6.2 deprecated get_page_by_title.
+	 *
+	 * @param string $string The title to look for.
+	 * @return string The page or nothing.
+	 */
+	private function get_page_by_title_search( $string ) {
+		global $wpdb;
+		$title = esc_sql( $string );
+		if ( ! $title ) {
+			return;
+		}
+		$post = $wpdb->get_results( "SELECT * FROM $wpdb->posts WHERE post_title='$title' AND post_type = 'page' AND post_status = 'publish' LIMIT 1" );
+		$id   = $post[0]->ID;
+		return $id;
+	}
+
+	/**
 	 * Class constructor
 	 */
 	public function __construct() {
@@ -32,8 +52,6 @@ class ORCOptions {
 		register_activation_hook( __FILE__, array( $this, 'orc_options_activation' ) );
 		register_deactivation_hook( __FILE__, array( $this, 'orc_options_deactivation' ) );
 		add_action( 'theme_prefix_rewrite_flush', array( $this, 'theme_prefix_rewrite_flush' ) );
-
-		add_action( 'orc_options_delete_emails', array( $this, 'orc_options_delete_emails_hook' ) );
 
 		// Enqueue styles and scripts.
 		add_action( 'admin_enqueue_scripts', array( $this, 'orc_options_admin_styles' ) );
@@ -80,23 +98,15 @@ class ORCOptions {
 
 	/**
 	 * Called on plugin activation
-	 * Enables the cron to delete messages in the flamingo plugin
 	 */
 	public function orc_options_activation() {
-		if ( wp_next_scheduled( 'orc_options_delete_emails' ) ) {
-			wp_clear_scheduled_hook( 'orc_options_delete_emails' );
-		}
-		wp_schedule_event( time(), 'twicedaily', 'orc_options_delete_emails' );
 		flush_rewrite_rules();
 	}
 
 	/**
 	 * Called on plugin deactivation
-	 * Turn off the cron to delete messages in the flamingo plugin
 	 */
 	public function orc_options_deactivation() {
-		$timestamp = wp_next_scheduled( 'orc_options_delete_emails' );
-		wp_unschedule_event( $timestamp, 'orc_options_delete_emails' );
 		flush_rewrite_rules();
 	}
 
@@ -105,63 +115,6 @@ class ORCOptions {
 	 */
 	public function theme_prefix_rewrite_flush() {
 		flush_rewrite_rules();
-	}
-
-	/**
-	 * Function to remove messages and users from the flamingo plugin data after a certain amound of days days
-	 */
-	public function orc_options_delete_emails_hook() {
-		global $wpdb;
-
-		// Get the number of days to hold the emails for or 30 days if not set.
-		$orc_options_email_delete_days = get_option( 'orc_options_email_delete_days', 30 );
-
-		/**
-		 * Get an array of ID and post_content
-		 * From the posts table where type post_type is a flamingo_inbound
-		 * with a post_date older than then umber of days set by the plugin
-		 * when the cron starts
-		 */
-		$postdataarray = array();
-		foreach ( $wpdb->get_results( $wpdb->prepare( 'SELECT ID, post_content FROM ' . $wpdb->posts . ' WHERE post_type="flamingo_inbound" AND post_date < DATE(NOW() - INTERVAL %d DAY) + INTERVAL 0 SECOND;', array( $orc_options_email_delete_days ) ) ) as $id => $postid ) {
-			$postdataarray[] = array(
-				'ID'           => $postid->ID,
-				'post_content' => $postid->post_content,
-			);
-		}
-
-		/**
-		 * Loop through all the expired emails stored using Contact Form 7 and Flamingo
-		 */
-		foreach ( $postdataarray as $postid ) {
-			/**
-			 * Get the eamil address from the post_content
-			 */
-			$post_content = $postid['post_content'];
-			preg_match( '/(\b[a-z0-9._%+-]+@[a-z0-9._%+-]+.[a-z0-9._%+-]+\b)/i', $post_content, $email );
-
-			/**
-			 * If we have an email address
-			 * Delete the postmeta and posts with the appropriate ID
-			 */
-			if ( is_array( $email ) ) {
-
-				$wpdb->query( $wpdb->prepare( 'DELETE FROM ' . $wpdb->postmeta . ' WHERE post_id=%d', array( $postid['ID'] ) ) );
-				$wpdb->query( $wpdb->prepare( 'DELETE FROM ' . $wpdb->posts . ' WHERE ID=%d', array( $postid['ID'] ) ) );
-
-				/**
-				 * Don't delete email addresses of loggedin users
-				 * otherwise if there are no more posts from that email address, delete the user
-				 */
-				$isloggedinuser = $wpdb->get_results( $wpdb->prepare( 'SELECT ID FROM ' . $wpdb->users . ' WHERE user_email=%s', array( $email[0] ) ) );
-				if ( ! array_key_exists( 0, $isloggedinuser ) ) {
-					$numposts = $wpdb->get_results( $wpdb->prepare( 'SELECT COUNT(ID) AS numposts FROM ' . $wpdb->posts . ' WHERE post_type="flamingo_inbound" AND post_content LIKE %s', array( '%' . $email[0] . '%' ) ) );
-					if ( 0 === intval( $numposts[0]->numposts ) ) {
-						$wpdb->query( $wpdb->prepare( 'DELETE FROM ' . $wpdb->posts . ' WHERE post_title=%s', array( $email[0] ) ) );
-					}
-				}
-			}
-		}
 	}
 
 	/**
@@ -177,9 +130,12 @@ class ORCOptions {
 	 * Add any scripts used by this plugin
 	 */
 	public function orc_options_add_scripts() {
+		$page_id = $this->get_page_by_title_search( 'Contact Us' );
+		$url     = esc_url( get_permalink( $page_id ) );
+
 		wp_enqueue_script( 'orc-contacthandler', plugins_url( 'dist/js/orc.contacthandler.min.js', __FILE__ ), array(), \filemtime( plugin_dir_path( __FILE__ ) . '/dist/js/orc.contacthandler.min.js' ), true );
 		// Pass the contact form permalink to the script.
-		$data = 'const contactdata = ' . wp_json_encode( array( 'contactuspage' => esc_url( get_permalink( get_page_by_title( 'Contact Us' ) ) ) ) );
+		$data = 'const contactdata = ' . wp_json_encode( array( 'contactuspage' => $url ) );
 		wp_add_inline_script( 'orc-contacthandler', $data, 'before' );
 
 		if ( is_page( 'tour' ) || is_front_page() ) {
@@ -400,15 +356,15 @@ class ORCOptions {
 	}
 
 	/**
-	 * Add Facebook Pixel Code
+	 * Add Facebook Pixel Code.
 	 */
 	public function orc_add_facebookpixel() {
-		// Add facebook ads manager verification code
+		// Add facebook ads manager verification code.
 		?>
 			<meta name="facebook-domain-verification" content="dkhdmer276azt3wehibac33x2e8bde" />
 		<?php
 
-		// Add facebook pixel code (actually using plugin for this right now)
+		// Add facebook pixel code (actually using plugin for this right now).
 		$orc_options_facebookpixel = Options::getOption( 'orc_options_facebookpixel' );
 
 		if ( strlen( $orc_options_facebookpixel ) > 0 ) {

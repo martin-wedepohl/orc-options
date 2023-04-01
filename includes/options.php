@@ -1,9 +1,15 @@
 <?php
+/**
+ * Options class for the plugin.
+ */
 
 namespace ORCOptions\Includes;
 
-defined('ABSPATH') or die;
+defined( 'ABSPATH' ) || die;
 
+/**
+ * Options class for the plugin.
+ */
 class Options {
 
 	private static $options = array();
@@ -12,15 +18,6 @@ class Options {
 	 * in the options array for program use.
 	 */
 	private static function initializeOptions() {
-		// self::$options = get_option( Config::SETTINGS_KEY );
-		// self::$options = shortcode_atts(
-		//     [
-		//         Config::PHONE => ''
-		//     ],
-		//     self::$options
-		// );
-		// // we need esc_js because the id is set through the form
-		// self::$options[ Config::PHONE ] = esc_js(self::$options[ Config::PHONE] );
 		self::$options[ Config::PHONE ]     = esc_js( get_option( Config::PHONE ) );
 		self::$options[ Config::TOLL_FREE ] = esc_js( get_option( Config::TOLL_FREE ) );
 		self::$options[ Config::TEXT ]      = esc_js( get_option( Config::TEXT ) );
@@ -67,7 +64,7 @@ class Options {
 	}
 	/**
 	 * Return all the options used by the plugin.
-	 * 
+	 *
 	 * @return array
 	 */
 	public static function getOptions() {
@@ -76,11 +73,11 @@ class Options {
 	/**
 	 * Return a single option used by the plugin.
 	 *
-	 * @param string $option Option to return.
+	 * @param string $option
 	 * @return string
 	 */
-	public static function getOption($option) {
-		return self::$options[$option];
+	public static function getOption( $option ) {
+		return self::$options[ $option ];
 	}
 	/**
 	 * Return the plugin version.
@@ -90,6 +87,4 @@ class Options {
 	public static function getVersion() {
 		return Config::PLUGIN_VERSION;
 	}
-
-
 }
