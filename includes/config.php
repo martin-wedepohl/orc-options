@@ -9,7 +9,6 @@ defined( 'ABSPATH' ) || die;
 
 class Config {
 	const PLUGIN_VERSION = '2.1.0';
-	const TEXT_DOMAIN    = 'orc-options';
 	const CAPABILITY     = 'edit_posts';
 	const MENU_SLUG      = 'orc-options';
 

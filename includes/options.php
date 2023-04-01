@@ -30,8 +30,6 @@ class Options {
 		self::$options[ Config::WEBSITE_ID ]        = esc_js( get_option( Config::WEBSITE_ID ) );
 		self::$options[ Config::PRIVACY_ID ]        = esc_js( get_option( Config::PRIVACY_ID ) );
 
-		self::$options[ Config::DELETE ] = esc_js( get_option( Config::DELETE ) );
-
 		self::$options[ Config::MAIN ] = esc_js( get_option( Config::MAIN ) );
 		self::$options[ Config::XMAS ] = esc_js( get_option( Config::XMAS ) );
 

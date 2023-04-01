@@ -30,16 +30,17 @@ class ORCOptions {
 	 * Get the page by searching for the title string.
 	 * Replaces the WP 6.2 deprecated get_page_by_title.
 	 *
-	 * @param string $string The title to look for.
+	 * @param string $title The title to look for.
 	 * @return string The page or nothing.
 	 */
-	private function get_page_by_title_search( $string ) {
+	private function get_page_by_title_search( $title ) {
 		global $wpdb;
-		$title = esc_sql( $string );
 		if ( ! $title ) {
 			return;
 		}
-		$post = $wpdb->get_results( "SELECT * FROM $wpdb->posts WHERE post_title='$title' AND post_type = 'page' AND post_status = 'publish' LIMIT 1" );
+
+		$sql  = $wpdb->prepare( "SELECT * FROM $wpdb->posts WHERE post_title='%s' AND post_type='page' AND post_status='publish' LIMIT 1", array( $title ) );
+		$post = $wpdb->get_results( $sql );
 		$id   = $post[0]->ID;
 		return $id;
 	}
